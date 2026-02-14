@@ -3,9 +3,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useLoveLetterConfig } from '../../state/useLoveLetterConfig';
+import { usePhotoGallery } from '../../state/usePhotoGallery';
 import { useShareLink } from '../../hooks/useShareLink';
-import { Settings, Share2, RotateCcw } from 'lucide-react';
+import { Settings, Share2, RotateCcw, Info } from 'lucide-react';
 
 export default function CustomizationPanel() {
   const {
@@ -24,7 +26,14 @@ export default function CustomizationPanel() {
     reset,
   } = useLoveLetterConfig();
 
+  const { clearPhotos } = usePhotoGallery();
   const { copyShareLink, isCopying } = useShareLink();
+
+  const handleResetAll = () => {
+    reset();
+    clearPhotos();
+    localStorage.removeItem('photo-gallery-storage');
+  };
 
   return (
     <section className="min-h-[80vh] py-12 px-4">
@@ -34,6 +43,13 @@ export default function CustomizationPanel() {
           <h2 className="text-4xl font-serif font-bold">Customize Your Page</h2>
           <p className="text-muted-foreground">Make it uniquely yours</p>
         </div>
+
+        <Alert>
+          <Info className="h-4 w-4" />
+          <AlertDescription>
+            Your customization details are saved only in this browser on this device and won't sync to other devices.
+          </AlertDescription>
+        </Alert>
 
         <Card>
           <CardHeader>
@@ -117,7 +133,7 @@ export default function CustomizationPanel() {
             <Share2 className="w-4 h-4" />
             {isCopying ? 'Copying...' : 'Copy Share Link'}
           </Button>
-          <Button onClick={reset} variant="outline" className="gap-2">
+          <Button onClick={handleResetAll} variant="outline" className="gap-2">
             <RotateCcw className="w-4 h-4" />
             Reset All
           </Button>

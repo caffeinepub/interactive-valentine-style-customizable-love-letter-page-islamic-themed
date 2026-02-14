@@ -2,10 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-translate-the-islamic-love-letter-template-library-into-bahasa-indonesia-by-updating-frontend-src-content-islamiclettertemplates-ts-so-that-each-template-s-title-and-content-are-written-in-natural-respectful-indonesian-while-preserving-islamic-references-e-g-bismillah-quran-verse-citations-and-hadith-references",
-      "featureTitle": "Translate the Islamic love letter template library into Bahasa Indonesia by updating `frontend/src/content/islamicLetterTemplates.ts` so that each template’s `title` and `content` are written in natural, respectful Indonesian while preserving Islamic references (e.g., Bismillah, Quran verse citations, and hadith references).",
+      "featureId": "feature-persist-the-photo-gallery-state-in-browser-storage-so-uploaded-photos-remain-visible-after-refresh-reopen-on-the-same-device-browser-profile",
+      "featureTitle": "Persist the photo gallery state in browser storage so uploaded photos remain visible after refresh/reopen on the same device/browser profile.",
       "files": [
-        "frontend/src/content/islamicLetterTemplates.ts"
+        "frontend/src/App.tsx",
+        "frontend/src/state/usePhotoGallery.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -15,15 +16,17 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-10"
+        "REQ-12"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-letter-section-defaults-and-placeholders-to-bahasa-indonesia-in-frontend-src-components-valentine-lettersection-tsx-including-the-fallback-displayfrom-value-the-fallback-finallettertext-the-textarea-placeholder-and-the-sign-off-line-shown-above-the-sender-name-so-that-the-letter-experience-is-consistently-indonesian-even-before-a-template-is-selected",
-      "featureTitle": "Update the Letter section defaults and placeholders to Bahasa Indonesia in `frontend/src/components/valentine/LetterSection.tsx`, including the fallback `displayFrom` value, the fallback `finalLetterText`, the textarea placeholder, and the sign-off line shown above the sender name, so that the letter experience is consistently Indonesian even before a template is selected.",
+      "featureId": "feature-replace-non-persistable-url-createobjecturl-usage-for-stored-gallery-items-with-a-persistable-representation-e-g-data-url-so-restored-photos-render-correctly-after-a-reload",
+      "featureTitle": "Replace non-persistable `URL.createObjectURL(...)` usage for stored gallery items with a persistable representation (e.g., Data URL) so restored photos render correctly after a reload.",
       "files": [
-        "frontend/src/components/valentine/LetterSection.tsx"
+        "frontend/src/components/valentine/GallerySection.tsx",
+        "frontend/src/components/valentine/PhotoUploader.tsx",
+        "frontend/src/state/usePhotoGallery.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -33,7 +36,46 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-11"
+        "REQ-13"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-persist-the-page-personalization-details-from-to-names-headline-date-place-note-and-letter-text-in-browser-storage-so-the-same-device-sees-the-same-details-after-refresh-reopen",
+      "featureTitle": "Persist the page personalization details (from/to names, headline, date, place, note, and letter text) in browser storage so the same device sees the same details after refresh/reopen.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/valentine/CustomizationPanel.tsx",
+        "frontend/src/state/useLoveLetterConfig.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-14"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-clear-user-facing-messaging-in-the-gallery-customization-experience-indicating-that-browser-saved-photos-details-are-stored-only-on-the-current-device-browser-and-will-not-automatically-appear-on-other-devices",
+      "featureTitle": "Add clear user-facing messaging in the Gallery/Customization experience indicating that browser-saved photos/details are stored only on the current device/browser and will not automatically appear on other devices.",
+      "files": [
+        "frontend/src/components/valentine/CustomizationPanel.tsx",
+        "frontend/src/components/valentine/GallerySection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-15"
       ],
       "confidence": "high"
     }

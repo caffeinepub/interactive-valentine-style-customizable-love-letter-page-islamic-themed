@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export type Section = 'intro' | 'reveal' | 'letter' | 'gallery' | 'details' | 'customize';
 
@@ -37,17 +38,37 @@ const defaultState = {
   currentSection: 'intro' as Section,
 };
 
-export const useLoveLetterConfig = create<LoveLetterConfig>((set) => ({
-  ...defaultState,
-  setFromName: (name) => set({ fromName: name }),
-  setToName: (name) => set({ toName: name }),
-  setHeadline: (headline) => set({ headline }),
-  setDate: (date) => set({ date }),
-  setPlace: (place) => set({ place }),
-  setNote: (note) => set({ note }),
-  setLetterText: (text) => set({ letterText: text }),
-  setSelectedTemplate: (index) => set({ selectedTemplate: index }),
-  loadTemplate: (templateText) => set({ letterText: templateText }),
-  setCurrentSection: (section) => set({ currentSection: section }),
-  reset: () => set(defaultState),
-}));
+export const useLoveLetterConfig = create<LoveLetterConfig>()(
+  persist(
+    (set) => ({
+      ...defaultState,
+      setFromName: (name) => set({ fromName: name }),
+      setToName: (name) => set({ toName: name }),
+      setHeadline: (headline) => set({ headline }),
+      setDate: (date) => set({ date }),
+      setPlace: (place) => set({ place }),
+      setNote: (note) => set({ note }),
+      setLetterText: (text) => set({ letterText: text }),
+      setSelectedTemplate: (index) => set({ selectedTemplate: index }),
+      loadTemplate: (templateText) => set({ letterText: templateText }),
+      setCurrentSection: (section) => set({ currentSection: section }),
+      reset: () => {
+        set(defaultState);
+        localStorage.removeItem('love-letter-config-storage');
+      },
+    }),
+    {
+      name: 'love-letter-config-storage',
+      partialize: (state) => ({
+        fromName: state.fromName,
+        toName: state.toName,
+        headline: state.headline,
+        date: state.date,
+        place: state.place,
+        note: state.note,
+        letterText: state.letterText,
+        selectedTemplate: state.selectedTemplate,
+      }),
+    }
+  )
+);

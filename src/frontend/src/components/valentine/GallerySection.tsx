@@ -1,7 +1,8 @@
 import { Card, CardContent } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { usePhotoGallery } from '../../state/usePhotoGallery';
 import PhotoUploader from './PhotoUploader';
-import { Images, X } from 'lucide-react';
+import { Images, X, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function GallerySection() {
@@ -15,6 +16,13 @@ export default function GallerySection() {
           <h2 className="text-4xl font-serif font-bold">Our Memories</h2>
           <p className="text-muted-foreground">Moments captured, love remembered</p>
         </div>
+
+        <Alert className="max-w-2xl mx-auto">
+          <Info className="h-4 w-4" />
+          <AlertDescription>
+            Photos are saved only in this browser on this device and won't automatically appear on other devices.
+          </AlertDescription>
+        </Alert>
 
         <PhotoUploader />
 

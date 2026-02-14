@@ -1,14 +1,17 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
+  "projectStateVersion": 7,
   "summary": "Build an interactive, beautiful Valentine-style webpage similar to the referenced example, with customization (names, photos, personal details) and an Islamic love letter component.",
   "architectural_notes": [
-    "Consider basic i18n support for the love letter section (at minimum: Bahasa Indonesia option for templates/default text)."
+    "Consider basic i18n support for the love letter section (at minimum: Bahasa Indonesia option for templates/default text).",
+    "Current photo uploads are only stored in temporary in-memory state; to persist on the same device without backend changes, store photo data/URLs in browser persistence (localStorage or preferably IndexedDB).",
+    "Cross-device photo availability requires backend storage of the actual image binaries; browser-only storage cannot sync across devices."
   ],
   "known_issues": [
-    "Prior build attempt failed with an AI processing error; user requested to try again."
+    "Prior build attempt failed with an AI processing error; user requested to try again.",
+    "Photos and letter are not visible on other devices because uploads are not persisted to a shared backend; current storage is device/browser-local only."
   ],
-  "isFixRequest": false,
+  "isFixRequest": true,
   "existing_features": [
     {
       "id": "feature-create-a-single-page-valentine-style-experience-similar-in-spirit-to-the-reference-site-with-an-interactive-flow-intro-reveal-letter-gallery-and-smooth-transitions-between-sections",
@@ -89,6 +92,38 @@
         "REQ-11"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-persist-the-photo-gallery-state-in-browser-storage-so-uploaded-photos-remain-visible-after-refresh-reopen-on-the-same-device-browser-profile",
+      "title": "Persist the photo gallery state in browser storage so uploaded photos remain visible after refresh/reopen on the same device/browser profile.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-non-persistable-url-createobjecturl-usage-for-stored-gallery-items-with-a-persistable-representation-e-g-data-url-so-restored-photos-render-correctly-after-a-reload",
+      "title": "Replace non-persistable `URL.createObjectURL(...)` usage for stored gallery items with a persistable representation (e.g., Data URL) so restored photos render correctly after a reload.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-persist-the-page-personalization-details-from-to-names-headline-date-place-note-and-letter-text-in-browser-storage-so-the-same-device-sees-the-same-details-after-refresh-reopen",
+      "title": "Persist the page personalization details (from/to names, headline, date, place, note, and letter text) in browser storage so the same device sees the same details after refresh/reopen.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-clear-user-facing-messaging-in-the-gallery-customization-experience-indicating-that-browser-saved-photos-details-are-stored-only-on-the-current-device-browser-and-will-not-automatically-appear-on-other-devices",
+      "title": "Add clear user-facing messaging in the Gallery/Customization experience indicating that browser-saved photos/details are stored only on the current device/browser and will not automatically appear on other devices.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -133,6 +168,12 @@
     {
       "id": "AR-14",
       "summary": "Provide the Islamic love letter content in Bahasa Indonesia (Indonesian), including templates and/or default letter text",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Persist uploaded photos (and related page details) in the browser (e.g., localStorage/IndexedDB) so they remain available after refresh/reopen on the same device",
       "reqIds": [],
       "status": "pending"
     }

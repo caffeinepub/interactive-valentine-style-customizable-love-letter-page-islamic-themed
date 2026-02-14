@@ -1,38 +1,104 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Bahasa Indonesia Islamic love letter templates and letter defaults",
+  "title": "Persist gallery photos and personalization details in browser storage (same device)",
   "requirements": [
     {
-      "id": "REQ-10",
-      "summary": "Translate all Islamic love letter templates (titles and bodies) to natural, respectful Bahasa Indonesia while preserving Islamic references and citations.",
+      "id": "REQ-12",
+      "summary": "Persist the photo gallery state in browser storage so uploaded photos restore after refresh/reopen on the same device.",
       "acceptanceCriteria": [
-        "All entries in `islamicLetterTemplates` have Indonesian `title` and Indonesian `content` text (no remaining English sentences in the template bodies).",
-        "Quran/hadith references remain present and correctly cited (e.g., Surah/ayah references like Quran 30:21, 2:187 are still included).",
-        "Selecting any template in the UI loads the Indonesian content into the letter editor and preview as expected."
+        "After uploading one or more photos, refreshing the page keeps the photos visible in the Gallery section.",
+        "Closing and reopening the site in the same browser profile restores the previously uploaded photos.",
+        "Removing a photo updates browser storage so it does not reappear after refresh.",
+        "The implementation does not rely on backend persistence for photos."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/content/islamicLetterTemplates.ts",
+          "path": "frontend/src/state/usePhotoGallery.ts",
           "operation": "modify",
-          "description": "Rewrite each template `title` and `content` in Bahasa Indonesia, ensuring the language is natural and adab-respecting; preserve Islamic phrases (e.g., Bismillah) and keep Quran/hadith citations (e.g., Quran 30:21, Quran 2:187) intact."
+          "description": "Add Zustand persistence (e.g., via zustand/middleware persist) for the gallery state (photos list and relevant fields) using browser storage; ensure removePhoto and clearPhotos update the persisted state; avoid storing non-serializable values."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Ensure the app correctly renders hydrated persisted gallery state on load (no reliance on backend); keep lightbox and section navigation behavior intact."
         }
       ]
     },
     {
-      "id": "REQ-11",
-      "summary": "Update the Letter section fallback text, placeholders, and sign-off line to Bahasa Indonesia for a consistently Indonesian letter experience before template selection.",
+      "id": "REQ-13",
+      "summary": "Store uploaded gallery images as a persistable representation (Data URL) instead of object URLs so restored photos render after reload.",
       "acceptanceCriteria": [
-        "When `fromName` is empty, the displayed sender fallback is in Indonesian.",
-        "When `letterText` is empty, the preview shows an Indonesian fallback prompt instead of English.",
-        "The textarea placeholder text is Indonesian.",
-        "The sign-off line (currently “With love,”) is Indonesian."
+        "Newly uploaded photos are saved in a form that still displays correctly after a full page reload (not broken blob/object URLs).",
+        "The gallery thumbnails and lightbox both render restored photos correctly after reload.",
+        "File type/size validation behavior remains intact for uploads."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/valentine/LetterSection.tsx",
+          "path": "frontend/src/components/valentine/PhotoUploader.tsx",
           "operation": "modify",
-          "description": "Update the `displayFrom` fallback string, `finalLetterText` fallback string, the Textarea `placeholder`, and the preview sign-off line text to Bahasa Indonesia while keeping the existing single-page flow, template selection behavior, and editable letter behavior unchanged."
+          "description": "Replace URL.createObjectURL usage by converting each validated File into a Data URL (e.g., using FileReader) before calling addPhoto; keep existing allowed-type and max-size validation and toasts intact; handle conversion failures with a user-facing error."
+        },
+        {
+          "path": "frontend/src/state/usePhotoGallery.ts",
+          "operation": "modify",
+          "description": "Update PhotoItem shape and gallery add/update logic as needed so stored items contain a persistable image source (e.g., Data URL stored in the existing url field or a new dataUrl field) and remain serializable for browser storage persistence."
+        },
+        {
+          "path": "frontend/src/components/valentine/GallerySection.tsx",
+          "operation": "modify",
+          "description": "Ensure the gallery thumbnail rendering uses the persistable image source from state so restored photos display correctly after reload, without changing the existing remove and lightbox activation behavior."
+        },
+        {
+          "path": "frontend/src/components/valentine/LightboxDialog.tsx",
+          "operation": "modify",
+          "description": "Ensure the lightbox renders the persistable image source from the restored gallery items (Data URLs) correctly after reload, preserving current navigation and captions."
+        }
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "summary": "Persist page personalization details (names/headline/date/place/note/letter text) in browser storage and clear them via Reset All while preserving share-link query parsing behavior.",
+      "acceptanceCriteria": [
+        "After setting customization fields (names/headline/date/place/note) and/or editing the letter text, refreshing the page restores those values.",
+        "Using the existing Reset All control clears both the in-memory state and the persisted browser storage for those details.",
+        "Persisted details do not break existing share-link query param parsing; query params still prefill on first load as currently designed."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/state/useLoveLetterConfig.ts",
+          "operation": "modify",
+          "description": "Add Zustand persistence (e.g., via zustand/middleware persist) for personalization fields (from/to, headline, date, place, note, letterText, selectedTemplate as applicable); ensure the reset action clears the persisted storage value for this config."
+        },
+        {
+          "path": "frontend/src/components/valentine/CustomizationPanel.tsx",
+          "operation": "modify",
+          "description": "Ensure the existing Reset All control clears both in-memory values and the persisted browser storage for personalization details (e.g., by calling an updated reset that also clears persisted storage), while keeping existing UI behavior and share-link copying intact."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Maintain current share-link query param parsing behavior while adding persistence: on initial load, continue to apply query params for from/to as currently designed, without breaking hydration of other persisted personalization fields."
+        }
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "summary": "Add user-facing messaging clarifying that browser-saved photos/details are device/browser-specific and won’t sync to other devices.",
+      "acceptanceCriteria": [
+        "The UI includes an English note that photos/details saved in the browser are device/browser-specific and won’t sync to other devices.",
+        "The message is visible near photo upload and/or customization actions and does not block normal usage."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/valentine/GallerySection.tsx",
+          "operation": "modify",
+          "description": "Add a visible English note near the photo upload/gallery controls explaining that photos are saved only in this browser on this device and won’t automatically appear on other devices."
+        },
+        {
+          "path": "frontend/src/components/valentine/CustomizationPanel.tsx",
+          "operation": "modify",
+          "description": "Add a visible English note near customization and/or Reset All actions explaining that details saved in the browser are device/browser-specific and won’t sync to other devices."
         }
       ]
     }

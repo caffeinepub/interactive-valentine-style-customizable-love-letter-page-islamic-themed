@@ -1,54 +1,94 @@
 {
   "kind": "build_request",
-  "title": "Provide Islamic love letter templates and default letter text in Bahasa Indonesia",
+  "title": "Persist uploaded photos and page details in browser storage (same device)",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-10",
-      "text": "Translate the Islamic love letter template library into Bahasa Indonesia by updating `frontend/src/content/islamicLetterTemplates.ts` so that each template’s `title` and `content` are written in natural, respectful Indonesian while preserving Islamic references (e.g., Bismillah, Quran verse citations, and hadith references).",
+      "id": "REQ-12",
+      "text": "Persist the photo gallery state in browser storage so uploaded photos remain visible after refresh/reopen on the same device/browser profile.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-recent-1"
         ],
         "quotes": [
-          "can you make the letter in bahasa indonesia"
+          "just save it in browser",
+          "yes now update the code so i can save the photo and view it in other devise"
         ]
       },
       "acceptanceCriteria": [
-        "All entries in `islamicLetterTemplates` have Indonesian `title` and Indonesian `content` text (no remaining English sentences in the template bodies).",
-        "Quran/hadith references remain present and correctly cited (e.g., Surah/ayah references like Quran 30:21, 2:187 are still included).",
-        "Selecting any template in the UI loads the Indonesian content into the letter editor and preview as expected."
+        "After uploading one or more photos, refreshing the page keeps the photos visible in the Gallery section.",
+        "Closing and reopening the site in the same browser profile restores the previously uploaded photos.",
+        "Removing a photo updates browser storage so it does not reappear after refresh.",
+        "The implementation does not rely on backend persistence for photos."
       ]
     },
     {
-      "id": "REQ-11",
-      "text": "Update the Letter section defaults and placeholders to Bahasa Indonesia in `frontend/src/components/valentine/LetterSection.tsx`, including the fallback `displayFrom` value, the fallback `finalLetterText`, the textarea placeholder, and the sign-off line shown above the sender name, so that the letter experience is consistently Indonesian even before a template is selected.",
+      "id": "REQ-13",
+      "text": "Replace non-persistable `URL.createObjectURL(...)` usage for stored gallery items with a persistable representation (e.g., Data URL) so restored photos render correctly after a reload.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-recent-1"
         ],
         "quotes": [
-          "can you make the letter in bahasa indonesia"
+          "Save the uploaded photos permanently so they load on any device when I open the page.",
+          "just save it in browser"
         ]
       },
       "acceptanceCriteria": [
-        "When `fromName` is empty, the displayed sender fallback is in Indonesian.",
-        "When `letterText` is empty, the preview shows an Indonesian fallback prompt instead of English.",
-        "The textarea placeholder text is Indonesian.",
-        "The sign-off line (currently “With love,”) is Indonesian."
+        "Newly uploaded photos are saved in a form that still displays correctly after a full page reload (not broken blob/object URLs).",
+        "The gallery thumbnails and lightbox both render restored photos correctly after reload.",
+        "File type/size validation behavior remains intact for uploads."
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "text": "Persist the page personalization details (from/to names, headline, date, place, note, and letter text) in browser storage so the same device sees the same details after refresh/reopen.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent-1"
+        ],
+        "quotes": [
+          "just make it so that i can see the photos and details in the other devise",
+          "just save it in browser"
+        ]
+      },
+      "acceptanceCriteria": [
+        "After setting customization fields (names/headline/date/place/note) and/or editing the letter text, refreshing the page restores those values.",
+        "Using the existing Reset All control clears both the in-memory state and the persisted browser storage for those details.",
+        "Persisted details do not break existing share-link query param parsing; query params still prefill on first load as currently designed."
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "text": "Add clear user-facing messaging in the Gallery/Customization experience indicating that browser-saved photos/details are stored only on the current device/browser and will not automatically appear on other devices.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent-1"
+        ],
+        "quotes": [
+          "i still cannot see the photos i upload",
+          "just save it in browser"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The UI includes an English note that photos/details saved in the browser are device/browser-specific and won’t sync to other devices.",
+        "The message is visible near photo upload and/or customization actions and does not block normal usage."
       ]
     }
   ],
   "constraints": [
-    "Do not edit any files under `frontend/src/components/ui` or other `frontend.immutablePaths` listed in SYSTEM_CONTEXT; only compose existing UI components.",
-    "Keep the existing single-page flow and editable letter behavior intact; only change language of the letter templates and letter-related defaults/placeholders."
+    "Do not edit files under frontend/src/components/ui (Shadcn components are read-only).",
+    "Backend must remain unchanged for this request; do not implement backend photo persistence.",
+    "Keep the Internet Identity hooks and actor hooks in frontend immutablePaths unchanged."
   ],
   "nonGoals": [
-    "Adding a multi-language toggle or internationalization framework.",
-    "Translating the entire application UI outside of the letter templates and letter-specific defaults/placeholders.",
-    "Backend changes or data migrations."
+    "Syncing photos across different devices/browsers (requires backend or external storage).",
+    "Storing photos in the Motoko canister.",
+    "Adding third-party storage or databases."
   ],
   "imageRequirements": {
     "required": [],

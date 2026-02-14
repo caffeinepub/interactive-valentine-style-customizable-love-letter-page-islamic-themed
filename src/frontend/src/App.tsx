@@ -18,16 +18,16 @@ import ReduceMotionToggle from './components/valentine/ReduceMotionToggle';
 import LightboxDialog from './components/valentine/LightboxDialog';
 
 export default function App() {
-  const { setFromName, setToName, currentSection, setCurrentSection } = useLoveLetterConfig();
+  const { setFromName, setToName, currentSection, fromName, toName } = useLoveLetterConfig();
   const { photos, activePhotoIndex, setActivePhotoIndex } = usePhotoGallery();
   const { isReducedMotion } = useReducedMotion();
 
-  // Parse URL query params on mount
+  // Parse URL query params on mount, but only if not already set from persisted storage
   useEffect(() => {
     const params = parseQueryParams();
-    if (params.from) setFromName(params.from);
-    if (params.to) setToName(params.to);
-  }, [setFromName, setToName]);
+    if (params.from && !fromName) setFromName(params.from);
+    if (params.to && !toName) setToName(params.to);
+  }, [setFromName, setToName, fromName, toName]);
 
   return (
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem>

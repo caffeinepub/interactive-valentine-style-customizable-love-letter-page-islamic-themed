@@ -28,13 +28,22 @@ export default function PhotoUploader() {
         return;
       }
 
-      // Create object URL for preview
-      const url = URL.createObjectURL(file);
-      addPhoto({
-        id: `${Date.now()}-${Math.random()}`,
-        url,
-        filename: file.name,
-      });
+      // Convert to Data URL for persistence
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const dataUrl = event.target?.result as string;
+        if (dataUrl) {
+          addPhoto({
+            id: `${Date.now()}-${Math.random()}`,
+            url: dataUrl,
+            filename: file.name,
+          });
+        }
+      };
+      reader.onerror = () => {
+        toast.error(`${file.name}: Failed to read file. Please try again.`);
+      };
+      reader.readAsDataURL(file);
     });
 
     // Reset input
