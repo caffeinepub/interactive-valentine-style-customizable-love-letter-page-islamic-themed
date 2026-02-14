@@ -1,0 +1,23 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-14T19:59:59.948Z",
+  "summary": "REQ-10 and REQ-11 appear implemented: the Islamic letter templates were translated to Bahasa Indonesia with Quran references preserved, and the Letter section’s specified defaults/placeholders (fallback sender, fallback letter text, textarea placeholder, sign-off line) were updated to Indonesian. However, additional LetterSection UI strings beyond the requested defaults/placeholders were also translated, which may exceed the stated constraint/non-goals.",
+  "missing_requirements": [],
+  "hallucinated_features": [
+    {
+      "description": "Translated additional LetterSection UI text beyond the explicitly requested defaults/placeholders (e.g., section heading, tagline, tab labels, template picker heading, edit heading, preview button text).",
+      "reason": "BuildRequest constraints/non-goals say to only change language of the letter templates and letter-related defaults/placeholders; REQ-11 only calls out specific defaults/placeholders, not the rest of the LetterSection UI labels.",
+      "evidence": [
+        "frontend/src/components/valentine/LetterSection.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.78,
+  "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/src/components/valentine/LetterSection.tsx",
+    "frontend/src/content/islamicLetterTemplates.ts",
+    "project_state.json"
+  ]
+}

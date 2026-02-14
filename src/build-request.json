@@ -1,0 +1,57 @@
+{
+  "kind": "build_request",
+  "title": "Provide Islamic love letter templates and default letter text in Bahasa Indonesia",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-10",
+      "text": "Translate the Islamic love letter template library into Bahasa Indonesia by updating `frontend/src/content/islamicLetterTemplates.ts` so that each template’s `title` and `content` are written in natural, respectful Indonesian while preserving Islamic references (e.g., Bismillah, Quran verse citations, and hadith references).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "can you make the letter in bahasa indonesia"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All entries in `islamicLetterTemplates` have Indonesian `title` and Indonesian `content` text (no remaining English sentences in the template bodies).",
+        "Quran/hadith references remain present and correctly cited (e.g., Surah/ayah references like Quran 30:21, 2:187 are still included).",
+        "Selecting any template in the UI loads the Indonesian content into the letter editor and preview as expected."
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Update the Letter section defaults and placeholders to Bahasa Indonesia in `frontend/src/components/valentine/LetterSection.tsx`, including the fallback `displayFrom` value, the fallback `finalLetterText`, the textarea placeholder, and the sign-off line shown above the sender name, so that the letter experience is consistently Indonesian even before a template is selected.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "can you make the letter in bahasa indonesia"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When `fromName` is empty, the displayed sender fallback is in Indonesian.",
+        "When `letterText` is empty, the preview shows an Indonesian fallback prompt instead of English.",
+        "The textarea placeholder text is Indonesian.",
+        "The sign-off line (currently “With love,”) is Indonesian."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit any files under `frontend/src/components/ui` or other `frontend.immutablePaths` listed in SYSTEM_CONTEXT; only compose existing UI components.",
+    "Keep the existing single-page flow and editable letter behavior intact; only change language of the letter templates and letter-related defaults/placeholders."
+  ],
+  "nonGoals": [
+    "Adding a multi-language toggle or internationalization framework.",
+    "Translating the entire application UI outside of the letter templates and letter-specific defaults/placeholders.",
+    "Backend changes or data migrations."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

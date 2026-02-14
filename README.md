@@ -1,2 +1,3 @@
-# interactive-valentine-style-customizable-love-letter-page-islamic-themed
-Exported from Caffeine project: Interactive Valentine-style customizable love letter page (Islamic-themed)
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

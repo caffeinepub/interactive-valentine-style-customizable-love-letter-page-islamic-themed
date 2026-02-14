@@ -1,0 +1,50 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-14T19:59:59.950Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 2,
+    "implemented": 2,
+    "items": [
+      {
+        "id": "REQ-10",
+        "summary": "Translate the Islamic love letter template library into Bahasa Indonesia by updating `frontend/src/content/islamicLetterTemplates.ts` so that each template’s `title` and `content` are written in natural, respectful Indonesian while preserving Islamic references (e.g., Bismillah, Quran verse citations, and hadith references).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/content/islamicLetterTemplates.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/content/islamicLetterTemplates.ts"
+        ]
+      },
+      {
+        "id": "REQ-11",
+        "summary": "Update the Letter section defaults and placeholders to Bahasa Indonesia in `frontend/src/components/valentine/LetterSection.tsx`, including the fallback `displayFrom` value, the fallback `finalLetterText`, the textarea placeholder, and the sign-off line shown above the sender name, so that the letter experience is consistently Indonesian even before a template is selected.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/valentine/LetterSection.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/valentine/LetterSection.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "build-template/README.md",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/components/valentine/LetterSection.tsx",
+    "frontend/src/content/islamicLetterTemplates.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

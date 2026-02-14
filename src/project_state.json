@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Build an interactive, beautiful Valentine-style webpage similar to the referenced example, with customization (names, photos, personal details) and an Islamic love letter component.",
+  "architectural_notes": [
+    "Consider basic i18n support for the love letter section (at minimum: Bahasa Indonesia option for templates/default text)."
+  ],
+  "known_issues": [
+    "Prior build attempt failed with an AI processing error; user requested to try again."
+  ],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-single-page-valentine-style-experience-similar-in-spirit-to-the-reference-site-with-an-interactive-flow-intro-reveal-letter-gallery-and-smooth-transitions-between-sections",
+      "title": "Create a single-page Valentine-style experience similar in spirit to the reference site, with an interactive flow (intro -> reveal -> letter -> gallery) and smooth transitions between sections.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-customization-form-that-lets-the-user-set-sender-name-recipient-name-and-additional-personal-details-at-minimum-short-title-headline-and-a-few-optional-fields-like-date-place-short-note-and-instantly-preview-the-changes-on-the-page",
+      "title": "Add a customization form that lets the user set sender name, recipient name, and additional personal details (at minimum: short title/headline and a few optional fields like date/place/short note), and instantly preview the changes on the page.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-support-adding-photos-to-the-page-via-file-upload-multiple-images-display-them-in-an-interactive-gallery-e-g-carousel-or-masonry-grid-with-lightbox",
+      "title": "Support adding photos to the page via file upload (multiple images). Display them in an interactive gallery (e.g., carousel or masonry grid with lightbox).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-islamic-love-letter-section-that-provides-a-a-selectable-template-library-and-b-a-fully-editable-custom-letter-area-with-respectful-language-and-styling",
+      "title": "Add an “Islamic love letter” section that provides (a) a selectable template library and (b) a fully editable custom letter area, with respectful language and styling.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-shareable-personalization-via-url-query-parameters-for-at-least-sender-and-recipient-names-e-g-from-to-on-page-load-parse-these-parameters-and-prefill-the-customization-state-accordingly",
+      "title": "Implement shareable personalization via URL query parameters for at least sender and recipient names (e.g., from/to). On page load, parse these parameters and prefill the customization state accordingly.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-coherent-beautiful-visual-theme-no-blue-purple-default-palette-with-romantic-subtle-islamic-geometric-accents-consistent-typography-spacing-and-component-styling-across-all-sections",
+      "title": "Apply a coherent, beautiful visual theme (no blue/purple default palette) with romantic + subtle Islamic geometric accents, consistent typography, spacing, and component styling across all sections.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-lightweight-delightful-interactions-animated-text-reveal-for-the-letter-gentle-floating-decorative-elements-and-micro-interactions-on-buttons-inputs-include-an-option-to-reduce-motion",
+      "title": "Add lightweight delightful interactions: animated text reveal for the letter, gentle floating decorative elements, and micro-interactions on buttons/inputs; include an option to reduce motion.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-decorative-assets-pattern-background-frame-ornament-elements-to-the-frontend-and-use-them-in-the-theme-as-non-intrusive-visuals",
+      "title": "Add generated static decorative assets (pattern background + frame/ornament elements) to the frontend and use them in the theme as non-intrusive visuals.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-translate-the-islamic-love-letter-template-library-into-bahasa-indonesia-by-updating-frontend-src-content-islamiclettertemplates-ts-so-that-each-template-s-title-and-content-are-written-in-natural-respectful-indonesian-while-preserving-islamic-references-e-g-bismillah-quran-verse-citations-and-hadith-references",
+      "title": "Translate the Islamic love letter template library into Bahasa Indonesia by updating `frontend/src/content/islamicLetterTemplates.ts` so that each template’s `title` and `content` are written in natural, respectful Indonesian while preserving Islamic references (e.g., Bismillah, Quran verse citations, and hadith references).",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-letter-section-defaults-and-placeholders-to-bahasa-indonesia-in-frontend-src-components-valentine-lettersection-tsx-including-the-fallback-displayfrom-value-the-fallback-finallettertext-the-textarea-placeholder-and-the-sign-off-line-shown-above-the-sender-name-so-that-the-letter-experience-is-consistently-indonesian-even-before-a-template-is-selected",
+      "title": "Update the Letter section defaults and placeholders to Bahasa Indonesia in `frontend/src/components/valentine/LetterSection.tsx`, including the fallback `displayFrom` value, the fallback `finalLetterText`, the textarea placeholder, and the sign-off line shown above the sender name, so that the letter experience is consistently Indonesian even before a template is selected.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a Valentine-style interactive website similar to the provided reference link",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Allow users to customize the page with recipient/sender names and other personal details",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add support for uploading/adding photos to the page",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Include an Islamic love letter section (template or customizable text)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Improve interactivity and visual design (animations/effects) to make the site more beautiful",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Include a basic Motoko canister interface that can store and retrieve a saved “page configuration” (names, details, letter text, and photo metadata excluding raw image binaries), to enable future persistence without blocking the current UI.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Provide the Islamic love letter content in Bahasa Indonesia (Indonesian), including templates and/or default letter text",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Interactive Valentine-style customizable love letter page (Islamic-themed)",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

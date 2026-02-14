@@ -1,0 +1,40 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Bahasa Indonesia Islamic love letter templates and letter defaults",
+  "requirements": [
+    {
+      "id": "REQ-10",
+      "summary": "Translate all Islamic love letter templates (titles and bodies) to natural, respectful Bahasa Indonesia while preserving Islamic references and citations.",
+      "acceptanceCriteria": [
+        "All entries in `islamicLetterTemplates` have Indonesian `title` and Indonesian `content` text (no remaining English sentences in the template bodies).",
+        "Quran/hadith references remain present and correctly cited (e.g., Surah/ayah references like Quran 30:21, 2:187 are still included).",
+        "Selecting any template in the UI loads the Indonesian content into the letter editor and preview as expected."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/content/islamicLetterTemplates.ts",
+          "operation": "modify",
+          "description": "Rewrite each template `title` and `content` in Bahasa Indonesia, ensuring the language is natural and adab-respecting; preserve Islamic phrases (e.g., Bismillah) and keep Quran/hadith citations (e.g., Quran 30:21, Quran 2:187) intact."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Update the Letter section fallback text, placeholders, and sign-off line to Bahasa Indonesia for a consistently Indonesian letter experience before template selection.",
+      "acceptanceCriteria": [
+        "When `fromName` is empty, the displayed sender fallback is in Indonesian.",
+        "When `letterText` is empty, the preview shows an Indonesian fallback prompt instead of English.",
+        "The textarea placeholder text is Indonesian.",
+        "The sign-off line (currently “With love,”) is Indonesian."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/valentine/LetterSection.tsx",
+          "operation": "modify",
+          "description": "Update the `displayFrom` fallback string, `finalLetterText` fallback string, the Textarea `placeholder`, and the preview sign-off line text to Bahasa Indonesia while keeping the existing single-page flow, template selection behavior, and editable letter behavior unchanged."
+        }
+      ]
+    }
+  ]
+}

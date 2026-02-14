@@ -1,0 +1,41 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-translate-the-islamic-love-letter-template-library-into-bahasa-indonesia-by-updating-frontend-src-content-islamiclettertemplates-ts-so-that-each-template-s-title-and-content-are-written-in-natural-respectful-indonesian-while-preserving-islamic-references-e-g-bismillah-quran-verse-citations-and-hadith-references",
+      "featureTitle": "Translate the Islamic love letter template library into Bahasa Indonesia by updating `frontend/src/content/islamicLetterTemplates.ts` so that each template’s `title` and `content` are written in natural, respectful Indonesian while preserving Islamic references (e.g., Bismillah, Quran verse citations, and hadith references).",
+      "files": [
+        "frontend/src/content/islamicLetterTemplates.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-letter-section-defaults-and-placeholders-to-bahasa-indonesia-in-frontend-src-components-valentine-lettersection-tsx-including-the-fallback-displayfrom-value-the-fallback-finallettertext-the-textarea-placeholder-and-the-sign-off-line-shown-above-the-sender-name-so-that-the-letter-experience-is-consistently-indonesian-even-before-a-template-is-selected",
+      "featureTitle": "Update the Letter section defaults and placeholders to Bahasa Indonesia in `frontend/src/components/valentine/LetterSection.tsx`, including the fallback `displayFrom` value, the fallback `finalLetterText`, the textarea placeholder, and the sign-off line shown above the sender name, so that the letter experience is consistently Indonesian even before a template is selected.",
+      "files": [
+        "frontend/src/components/valentine/LetterSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
